@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SafeBet Software – Presentation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #1f2937 0, #020617 55%, #000 100%);
+      color: #f9fafb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .deck {
+      width: min(1100px, 100vw - 2rem);
+      height: min(650px, 100vh - 2rem);
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 32px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      position: relative;
+      overflow: hidden;
+      padding: 1.5rem 2rem 2rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header.deck-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .logo-circle {
+      width: 52px;
+      height: 52px;
+      border-radius: 1.5rem;
+      background: conic-gradient(from 210deg, #22c55e, #0ea5e9, #22c55e);
+      padding: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 12px 30px rgba(34, 197, 94, 0.45);
+    }
+
+    .logo-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 1.3rem;
+      background: #020617;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #e5fdf2;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      font-size: 1.1rem;
+    }
+
+    .brand-text h1 {
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+
+    .brand-text p {
+      font-size: 0.8rem;
+      color: #9ca3af;
+    }
+
+    .meta {
+      text-align: right;
+      font-size: 0.8rem;
+      color: #9ca3af;
+    }
+
+    .meta strong {
+      display: block;
+      color: #e5e7eb;
+      font-weight: 600;
+    }
+
+    main.slides {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      margin-top: 1rem;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: 1.25rem 0.25rem 0.25rem;
+      opacity: 0;
+      transform: translateX(40px);
+      pointer-events: none;
+      transition: opacity 260ms ease, transform 260ms ease;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
+      gap: 1.5rem;
+    }
+
+    .slide.active {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+    }
+
+    .slide-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .slide-subtitle {
+      font-size: 0.95rem;
+      color: #9ca3af;
+      margin-bottom: 1.2rem;
+    }
+
+    ul.bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      font-size: 1rem;
+    }
+
+    ul.bullets li::before {
+      content: "";
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      margin-right: 0.5rem;
+      background: linear-gradient(120deg, #22c55e, #0ea5e9);
+    }
+
+    .note {
+      margin-top: 0.9rem;
+      font-size: 0.85rem;
+      color: #9ca3af;
+    }
+
+    .visual-panel {
+      border-radius: 24px;
+      background: radial-gradient(circle at top left, rgba(45, 212, 191, 0.25), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(56, 189, 248, 0.3), transparent 60%),
+        rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      padding: 1.1rem 1.1rem 0.9rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .visual-tag {
+      align-self: flex-start;
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 999px;
+      padding: 0.2rem 0.7rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      color: #e5e7eb;
+    }
+
+    .visual-heading {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .visual-text {
+      font-size: 0.85rem;
+      color: #d1d5db;
+    }
+
+    .image-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.6rem;
+      margin-top: 0.5rem;
+    }
+
+    .image-card {
+      border-radius: 18px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      min-height: 120px;
+      overflow: hidden;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+    }
+
+    .image-card::after {
+      content: attr(data-label);
+      position: absolute;
+      inset: auto 0 0 0;
+      padding: 0.35rem 0.6rem;
+      font-size: 0.7rem;
+      background: linear-gradient(to top, rgba(15, 23, 42, 0.95), transparent);
+    }
+
+    .logo-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.7rem;
+      background: radial-gradient(circle at top, rgba(15, 118, 110, 0.8), rgba(15, 23, 42, 0.95));
+      border-radius: 18px;
+      padding: 0.7rem 1rem;
+      border: 1px solid rgba(34, 197, 94, 0.5);
+    }
+
+    .logo-mini-circle {
+      width: 38px;
+      height: 38px;
+      border-radius: 1.1rem;
+      background: radial-gradient(circle at 30% 0, #a7f3d0, #22c55e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1rem;
+      color: #022c22;
+      box-shadow: 0 10px 25px rgba(34, 197, 94, 0.55);
+    }
+
+    .logo-wordmark {
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .logo-caption {
+      font-size: 0.7rem;
+      color: #e5e7eb;
+    }
+
+    footer.controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: #9ca3af;
+      margin-top: 0.3rem;
+    }
+
+    .buttons {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    button.nav-btn {
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.9);
+      color: #e5e7eb;
+      padding: 0.45rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      cursor: pointer;
+      transition: background 150ms ease, border-color 150ms ease, transform 120ms ease;
+    }
+
+    button.nav-btn span.icon {
+      font-size: 1rem;
+      line-height: 1;
+    }
+
+    button.nav-btn:hover {
+      background: radial-gradient(circle at top, rgba(34, 197, 94, 0.15), rgba(15, 23, 42, 0.95));
+      border-color: rgba(34, 197, 94, 0.7);
+      transform: translateY(-1px);
+    }
+
+    .step-indicator {
+      font-variant-numeric: tabular-nums;
+    }
+
+    .kbd {
+      border-radius: 6px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      padding: 0.1rem 0.35rem;
+      font-size: 0.75rem;
+      margin: 0 2px;
+    }
+
+    .wireframe-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+    }
+
+    .wireframe-phone {
+      border-radius: 18px;
+      padding: 0.6rem;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(15, 23, 42, 0.9),
+        rgba(15, 23, 42, 0.9) 6px,
+        rgba(31, 41, 55, 0.95) 6px,
+        rgba(31, 41, 55, 0.95) 12px
+      );
+      border: 1px dashed rgba(148, 163, 184, 0.6);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .wireframe-label {
+      position: absolute;
+      bottom: 0.25rem;
+      left: 0.4rem;
+      right: 0.4rem;
+      font-size: 0.7rem;
+      text-align: center;
+      background: linear-gradient(to top, rgba(15, 23, 42, 0.9), transparent);
+      padding-top: 0.25rem;
+    }
+
+    .wf-header,
+    .wf-block {
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.4);
+      margin-bottom: 0.25rem;
+    }
+
+    .wf-header {
+      height: 7px;
+      width: 70%;
+      margin-inline: auto;
+      margin-bottom: 0.4rem;
+    }
+
+    .wf-block {
+      height: 5px;
+      width: 85%;
+      margin-inline: auto;
+    }
+
+    .phone {
+      margin-top: 1rem;
+      align-self: center;
+      width: 230px;
+      height: 430px;
+      border-radius: 32px;
+      padding: 0.75rem 0.75rem 0.9rem;
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 1), rgba(3, 7, 18, 1));
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.8);
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      position: relative;
+    }
+
+    .phone-notch {
+      width: 90px;
+      height: 14px;
+      border-radius: 0 0 999px 999px;
+      background: #020617;
+      margin: 0 auto;
+      box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.9);
+    }
+
+    .phone-screen {
+      flex: 1;
+      border-radius: 22px;
+      background: radial-gradient(circle at top left, rgba(34, 197, 94, 0.12), rgba(15, 23, 42, 1));
+      padding: 0.8rem 0.9rem;
+      font-size: 0.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      opacity: 0;
+      transform: translateY(10px) scale(0.98);
+      pointer-events: none;
+      transition: opacity 220ms ease, transform 220ms ease;
+    }
+
+    .phone-screen.active {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+      animation: screenIn 220ms ease;
+    }
+
+    .phone-screen h3 {
+      font-size: 0.9rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .phone-pill {
+      border-radius: 999px;
+      padding: 0.15rem 0.55rem;
+      font-size: 0.7rem;
+      align-self: flex-start;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(34, 197, 94, 0.7);
+    }
+
+    .phone-metric-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.4rem;
+      margin-top: 0.35rem;
+      font-size: 0.7rem;
+    }
+
+    .phone-metric {
+      flex: 1;
+      padding: 0.35rem 0.4rem;
+      border-radius: 0.9rem;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      text-align: center;
+    }
+
+    .phone-metric span {
+      display: block;
+    }
+
+    .phone-metric span.value {
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+
+    .phone-nav {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.4rem;
+      background: rgba(15, 23, 42, 0.95);
+      border-radius: 999px;
+      padding: 0.35rem 0.45rem;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      font-size: 0.7rem;
+    }
+
+    .phone-nav button {
+      flex: 1;
+      border-radius: 999px;
+      border: none;
+      background: transparent;
+      color: #e5e7eb;
+      padding: 0.25rem 0.3rem;
+      cursor: pointer;
+      font-size: 0.7rem;
+      transition: background 160ms ease, transform 120ms ease, color 160ms ease;
+    }
+
+    .phone-nav button.active {
+      background: linear-gradient(120deg, #22c55e, #0ea5e9);
+      color: #022c22;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(34, 197, 94, 0.55);
+    }
+
+    .phone-nav button:active {
+      transform: translateY(0);
+      box-shadow: none;
+    }
+
+    @keyframes screenIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .slide {
+        grid-template-columns: minmax(0, 1fr);
+        grid-auto-rows: auto;
+        overflow-y: auto;
+      }
+
+      .visual-panel {
+        order: -1;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .deck {
+        padding: 1.1rem 1.1rem 1.3rem;
+      }
+
+      .slide-title {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="deck">
+    <header class="deck-header">
+      <div class="brand">
+        <div class="logo-circle">
+          <div class="logo-inner">SB</div>
+        </div>
+        <div class="brand-text">
+          <h1>SafeBet Software</h1>
+          <p>Responsible gambling control app</p>
+        </div>
+      </div>
+      <div class="meta">
+        <strong>CEO: Miguel Francisco Cortés Álvarez</strong>
+        Villahermosa, Tabasco, México
+      </div>
+    </header>
+
+    <main class="slides" aria-live="polite">
+      <!-- Slide 1: Intro -->
+      <section class="slide active" data-index="0">
+        <div>
+          <h2 class="slide-title">Welcome to SafeBet Software</h2>
+          <p class="slide-subtitle">
+            Today we present a technology company from Tabasco, México, that uses software to make betting safer and
+            more responsible.
+          </p>
+          <ul class="bullets">
+            <li>Company: <strong>SafeBet Software</strong></li>
+            <li>Headquarters: <strong>Villahermosa, Tabasco, México</strong></li>
+            <li>CEO: <strong>Miguel Francisco Cortés Álvarez</strong></li>
+            <li>Product: a <strong>responsible gambling control app</strong></li>
+          </ul>
+          <p class="note">
+            Speaking tip: here you can greet the audience and say you will talk about a company that protects people
+            instead of promoting betting.
+          </p>
+        </div>
+        <aside class="visual-panel">
+          <span class="visual-tag">Overview</span>
+          <div class="visual-heading">Digital protection for real people</div>
+          <p class="visual-text">
+            SafeBet Software combines modern web technologies, data analysis and simple design to help users control
+            how much time and money is spent on betting platforms.
+          </p>
+          <div class="image-row">
+            <div
+              class="image-card"
+              data-label="App dashboard"
+              style="background-image: url('https://images.pexels.com/photos/6120214/pexels-photo-6120214.jpeg?auto=compress&cs=tinysrgb&w=800');"
+            ></div>
+            <div
+              class="image-card"
+              data-label="Responsible gaming"
+              style="background-image: url('https://images.pexels.com/photos/5716015/pexels-photo-5716015.jpeg?auto=compress&cs=tinysrgb&w=800');"
+            ></div>
+          </div>
+        </aside>
+      </section>
+
+      <!-- Slide 2: Company & Location -->
+      <section class="slide" data-index="1">
+        <div>
+          <h2 class="slide-title">Our Company & Location</h2>
+          <p class="slide-subtitle">SafeBet Software was founded in southern México, in the state of Tabasco.</p>
+          <ul class="bullets">
+            <li>The company is <strong>based in Villahermosa, Tabasco</strong>.</li>
+            <li>The region is known for its energy industry and growing tech talent.</li>
+            <li>SafeBet focuses on building ethical, user‑friendly software.</li>
+            <li>The CEO is <strong>Miguel Francisco Cortés Álvarez</strong>, a software engineer from Tabasco.</li>
+          </ul>
+          <p class="note">
+            Speaking tip: mention that the company is Mexican and that local talent is used to create global digital
+            products.
+          </p>
+        </div>
+        <aside class="visual-panel">
+          <span class="visual-tag">Location</span>
+          <div class="visual-heading">Villahermosa, Tabasco, México</div>
+          <p class="visual-text">
+            A modern office in Villahermosa connects developers, designers and data analysts who work remotely with
+            partners around the world.
+          </p>
+          <div class="image-row">
+            <div
+              class="image-card"
+              data-label="City view"
+              style="background-image: url('https://images.pexels.com/photos/313782/pexels-photo-313782.jpeg?auto=compress&cs=tinysrgb&w=800');"
+            ></div>
+            <div
+              class="image-card"
+              data-label="Tech office"
+              style="background-image: url('https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&w=800');"
+            ></div>
+          </div>
+        </aside>
+      </section>
+
+      <!-- Slide 3: Logo & Identity -->
+      <section class="slide" data-index="2">
+        <div>
+          <h2 class="slide-title">Logo & Brand Identity</h2>
+          <p class="slide-subtitle">
+            The logo represents protection, clarity and smart control of betting time and money.
+          </p>
+          <ul class="bullets">
+            <li>The shield shape symbolizes <strong>safety and protection</strong>.</li>
+            <li>The green color represents <strong>healthy limits</strong> and balance.</li>
+            <li>The initials "SB" stand for <strong>SafeBet</strong>.</li>
+            <li>The design is kept simple so it is easy to recognize in an app icon.</li>
+          </ul>
+          <p class="note">
+            Speaking tip: here you can show your own drawn version of the logo and explain the meaning of the colors and
+            shapes.
+          </p>
+        </div>
+        <aside class="visual-panel">
+          <span class="visual-tag">Logo concept</span>
+          <div class="logo-card">
+            <div class="logo-mini-circle">SB</div>
+            <div>
+              <div class="logo-wordmark">SafeBet Software</div>
+              <div class="logo-caption">Digital shield for responsible betting</div>
+            </div>
+          </div>
+          <p class="visual-text">
+            The logo can be printed on slides, app splash screens and promotional material. It works both in dark and
+            light backgrounds.
+          </p>
+          <div class="image-row">
+            <div
+              class="image-card"
+              data-label="App icon mockup"
+              style="background-image: url('https://images.pexels.com/photos/1092644/pexels-photo-1092644.jpeg?auto=compress&cs=tinysrgb&w=800');"
+            ></div>
+            <div
+              class="image-card"
+              data-label="Presentation slide"
+              style="background-image: url('https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=800');"
+            ></div>
+          </div>
+        </aside>
+      </section>
+
+      <!-- Slide 4: Product description -->
+      <section class="slide" data-index="3">
+        <div>
+          <h2 class="slide-title">Our Product: Responsible Gambling App</h2>
+          <p class="slide-subtitle">
+            SafeBet does not promote betting. Instead, it helps users control their habits using clear limits and
+            friendly alerts.
+          </p>
+          <ul class="bullets">
+            <li>The app is <strong>connected</strong> to betting websites and apps.</li>
+            <li>Time and money <strong>limits are set</strong> by the user inside SafeBet.</li>
+            <li>Notifications <strong>are sent</strong> when a limit is close or passed.</li>
+            <li>Statistics and graphs <strong>are shown</strong> to explain user behaviour.</li>
+          </ul>
+          <p class="note">
+            These sentences already use the passive voice: limits are set, alerts are sent, statistics are shown.
+          </p>
+        </div>
+        <aside class="visual-panel">
+          <span class="visual-tag">Product</span>
+          <div class="visual-heading">Key screens of the app</div>
+          <p class="visual-text">
+            The interface is designed so users quickly understand how their betting time and money are being used.
+          </p>
+          <div class="image-row">
+            <div
+              class="image-card"
+              data-label="Limits screen"
+              style="background-image: url('https://images.pexels.com/photos/5380664/pexels-photo-5380664.jpeg?auto=compress&cs=tinysrgb&w=800');"
+            ></div>
+            <div
+              class="image-card"
+              data-label="Statistics overview"
+              style="background-image: url('https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=800');"
+            ></div>
+          </div>
+        </aside>
+      </section>
+
+      <!-- Slide 5: Inspiration -->
+      <section class="slide" data-index="4">
+        <div>
+          <h2 class="slide-title">Inspiration for SafeBet</h2>
+          <p class="slide-subtitle">
+            The project was inspired by real stories about people who lost control of their betting habits.
+          </p>
+          <ul class="bullets">
+            <li>The app <strong>was created</strong> because many people spend too much money on betting.</li>
+            <li>Families <strong>were affected</strong> by financial stress.</li>
+            <li>A solution <strong>was imagined</strong> that uses software to protect users.</li>
+            <li>The SafeBet concept <strong>was developed</strong> by a young team from Tabasco.</li>
+          </ul>
+          <p class="note">
+            Here you can talk about why responsible gambling is important and how technology can be used for social good.
+          </p>
+        </div>
+        <aside class="visual-panel">
+          <span class="visual-tag">Inspiration</span>
+          <div class="visual-heading">From problem to idea</div>
+          <p class="visual-text">
+            Instead of building another betting platform, SafeBet turns software into a protective tool that encourages
+            healthy limits and self‑control.
+          </p>
+          <div class="image-row">
+            <div
+              class="image-card"
+              data-label="Thinking about solutions"
+              style="background-image: url('https://images.pexels.com/photos/1181534/pexels-photo-1181534.jpeg?auto=compress&cs=tinysrgb&w=800');"
+            ></div>
+            <div
+              class="image-card"
+              data-label="Family focus"
+              style="background-image: url('https://images.pexels.com/photos/5255336/pexels-photo-5255336.jpeg?auto=compress&cs=tinysrgb&w=800');"
+            ></div>
+          </div>
+        </aside>
+      </section>
+
+      <!-- Slide 6: Elaboration process Part 1 -->
+      <section class="slide" data-index="5">
+        <div>
+          <h2 class="slide-title">Elaboration Process – Part 1</h2>
+          <p class="slide-subtitle">This is how the product is planned and designed.</p>
+          <ul class="bullets">
+            <li>
+              <strong>Problem identification:</strong> the main problem <strong>is identified</strong> by the team and
+              different ideas <strong>are discussed</strong>.
+            </li>
+            <li>
+              <strong>Research:</strong> existing tools <strong>are studied</strong> and user needs
+              <strong>are analyzed</strong>.
+            </li>
+            <li>
+              <strong>Design:</strong> the first screens <strong>are designed</strong> by UX and UI designers.
+            </li>
+            <li>
+              <strong>Planning:</strong> all features <strong>are organized</strong> in a product roadmap and deadlines
+              <strong>are set</strong> by the project manager.
+            </li>
+          </ul>
+          <p class="note">
+            Each verb is in passive voice: is identified, are discussed, are studied, are analyzed, are designed, are
+            organized, are set.
+          </p>
+        </div>
+        <aside class="visual-panel">
+          <span class="visual-tag">Process</span>
+          <div class="visual-heading">From idea to clear plan</div>
+          <p class="visual-text">
+            Before a single line of code is written, the problem is understood and a simple, human‑centered design is
+            sketched.
+          </p>
+          <div class="image-row">
+            <div
+              class="image-card"
+              data-label="Wireframes"
+              style="background-image: url('https://images.pexels.com/photos/196645/pexels-photo-196645.jpeg?auto=compress&cs=tinysrgb&w=800');"
+            ></div>
+            <div
+              class="image-card"
+              data-label="Planning board"
+              style="background-image: url('https://images.pexels.com/photos/3861958/pexels-photo-3861958.jpeg?auto=compress&cs=tinysrgb&w=800');"
+            ></div>
+          </div>
+        </aside>
+      </section>
+
+      <!-- Slide 7: Elaboration process Part 2 -->
+      <section class="slide" data-index="6">
+        <div>
+          <h2 class="slide-title">Elaboration Process – Part 2</h2>
+          <p class="slide-subtitle">Now the app is programmed, tested and released.</p>
+          <ul class="bullets">
+            <li>
+              <strong>Development:</strong> the app <strong>is programmed</strong> in JavaScript and Python; security
+              modules <strong>are added</strong> to protect user data.
+            </li>
+            <li>
+              <strong>Testing:</strong> the app <strong>is tested</strong> by real volunteers; bugs
+              <strong>are found</strong> and <strong>are fixed</strong> before the release.
+            </li>
+            <li>
+              <strong>Release:</strong> the first version <strong>is released</strong> on Android and iOS stores.
+            </li>
+            <li>
+              <strong>Feedback:</strong> comments from users <strong>are collected</strong> to improve the product.
+            </li>
+          </ul>
+          <p class="note">
+            You can explain each step slowly so your classmates understand how software is really built.
+          </p>
+        </div>
+        <aside class="visual-panel">
+          <span class="visual-tag">Development</span>
+          <div class="visual-heading">Writing and testing the code</div>
+          <p class="visual-text">
+            Developers from Tabasco write clean, well‑tested code so the app is stable before it is published to users.
+          </p>
+          <div class="image-row">
+            <div
+              class="image-card"
+              data-label="Coding session"
+              style="background-image: url('https://images.pexels.com/photos/3861964/pexels-photo-3861964.jpeg?auto=compress&cs=tinysrgb&w=800');"
+            ></div>
+            <div
+              class="image-card"
+              data-label="Mobile testing"
+              style="background-image: url('https://images.pexels.com/photos/1181243/pexels-photo-1181243.jpeg?auto=compress&cs=tinysrgb&w=800');"
+            ></div>
+          </div>
+        </aside>
+      </section>
+
+      <!-- Slide 8: Improvements & future -->
+      <section class="slide" data-index="7">
+        <div>
+          <h2 class="slide-title">Improvements & Future Plans</h2>
+          <p class="slide-subtitle">
+            The app keeps evolving. New features have been added and more tools will be created in the future.
+          </p>
+          <ul class="bullets">
+            <li>New tools <strong>have been added</strong> to help families control betting habits.</li>
+            <li>The design <strong>has been improved</strong> after user feedback.</li>
+            <li>More languages <strong>will be added</strong> next year.</li>
+            <li>New integrations <strong>will be created</strong> with more betting websites.</li>
+          </ul>
+          <p class="note">
+            Here you can mix present perfect passive (have been added, has been improved) and future passive (will be
+            added, will be created).
+          </p>
+        </div>
+        <aside class="visual-panel">
+          <span class="visual-tag">Future</span>
+          <div class="visual-heading">Growing with the users</div>
+          <p class="visual-text">
+            SafeBet is designed to grow with new technologies and regulations so users keep receiving clear, honest
+            information.
+          </p>
+          <div class="image-row">
+            <div
+              class="image-card"
+              data-label="Future roadmap"
+              style="background-image: url('https://images.pexels.com/photos/1181519/pexels-photo-1181519.jpeg?auto=compress&cs=tinysrgb&w=800');"
+            ></div>
+            <div
+              class="image-card"
+              data-label="Global users"
+              style="background-image: url('https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=800');"
+            ></div>
+          </div>
+        </aside>
+      </section>
+
+      <!-- Slide 9: Closing -->
+      <section class="slide" data-index="8">
+        <div>
+          <h2 class="slide-title">Conclusion</h2>
+          <p class="slide-subtitle">
+            SafeBet Software shows how a company from Tabasco, México, can use software to protect people and promote
+            responsible gambling.
+          </p>
+          <ul class="bullets">
+            <li>The app <strong>is used</strong> to control betting time and money, not to promote more betting.</li>
+            <li>Technology <strong>is transformed</strong> into a tool for health and balance.</li>
+            <li>Local talent from Tabasco <strong>is connected</strong> with global digital markets.</li>
+            <li>People around the world <strong>are supported</strong> by clear information and limits.</li>
+          </ul>
+          <p class="note">
+            Final tip: end by thanking the audience and repeating the main idea: software can be used to protect people.
+          </p>
+        </div>
+        <aside class="visual-panel">
+          <span class="visual-tag">Thank you</span>
+          <div class="visual-heading">Gracias – Thank you for listening</div>
+          <p class="visual-text">
+            You can leave this slide on the screen while you answer questions from your teacher and classmates.
+          </p>
+          <div class="image-row">
+            <div
+              class="image-card"
+              data-label="Team from Tabasco"
+              style="background-image: url('https://images.pexels.com/photos/1181352/pexels-photo-1181352.jpeg?auto=compress&cs=tinysrgb&w=800');"
+            ></div>
+            <div
+              class="image-card"
+              data-label="Thank you"
+              style="background-image: url('https://images.pexels.com/photos/1181605/pexels-photo-1181605.jpeg?auto=compress&cs=tinysrgb&w=800');"
+            ></div>
+          </div>
+        </aside>
+      </section>
+
+      <!-- Slide 10: Wireframes & Demo -->
+      <section class="slide" data-index="9">
+        <div>
+          <h2 class="slide-title">Mobile Wireframes & Live Demo</h2>
+          <p class="slide-subtitle">
+            At the end of the presentation, a simple prototype is shown so the audience can see how the SafeBet app
+            would look on a real phone.
+          </p>
+          <ul class="bullets">
+            <li>Basic wireframes <strong>are created</strong> for the main screens: Home, Limits and Statistics.</li>
+            <li>A small interactive demo <strong>is built</strong> in HTML, CSS and JavaScript.</li>
+            <li>Each button <strong>is connected</strong> to a different screen inside the phone.</li>
+            <li>This prototype <strong>is used</strong> to impress the audience and explain the app flow.</li>
+          </ul>
+          <p class="note">
+            You can change between the screens during your presentation and explain what the user sees on each one.
+          </p>
+        </div>
+        <aside class="visual-panel">
+          <span class="visual-tag">Prototype</span>
+          <div class="visual-heading">From wireframes to interactive app</div>
+          <p class="visual-text">
+            First, low‑fidelity wireframes are drawn. Then, an interactive prototype is coded to simulate the real
+            mobile experience.
+          </p>
+          <div class="wireframe-row">
+            <div class="wireframe-phone">
+              <div class="wf-header"></div>
+              <div class="wf-block"></div>
+              <div class="wf-block"></div>
+              <div class="wireframe-label">Home – Today overview</div>
+            </div>
+            <div class="wireframe-phone">
+              <div class="wf-header"></div>
+              <div class="wf-block"></div>
+              <div class="wf-block"></div>
+              <div class="wireframe-label">Limits – Time &amp; money</div>
+            </div>
+            <div class="wireframe-phone">
+              <div class="wf-header"></div>
+              <div class="wf-block"></div>
+              <div class="wf-block"></div>
+              <div class="wireframe-label">Stats – Weekly report</div>
+            </div>
+          </div>
+
+          <div class="phone" aria-label="SafeBet mobile app demo">
+            <div class="phone-notch"></div>
+            <div class="phone-screen active" data-screen="home">
+              <span class="phone-pill">Home · Today</span>
+              <h3>Hola, Miguel</h3>
+              <p>2 hours of betting time are left for today. Your money limit has not been reached.</p>
+              <div class="phone-metric-row">
+                <div class="phone-metric">
+                  <span class="label">Time used</span>
+                  <span class="value">1h 15m</span>
+                </div>
+                <div class="phone-metric">
+                  <span class="label">Money used</span>
+                  <span class="value">$320 MXN</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="phone-screen" data-screen="limits">
+              <span class="phone-pill">Limits</span>
+              <h3>Daily controls</h3>
+              <p>Time and money limits are set by the user and can be adjusted at any moment.</p>
+              <div class="phone-metric-row">
+                <div class="phone-metric">
+                  <span class="label">Time limit</span>
+                  <span class="value">3h 30m</span>
+                </div>
+                <div class="phone-metric">
+                  <span class="label">Money limit</span>
+                  <span class="value">$600 MXN</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="phone-screen" data-screen="stats">
+              <span class="phone-pill">Statistics</span>
+              <h3>This week</h3>
+              <p>Clear statistics are shown so the user understands how habits are changing over time.</p>
+              <div class="phone-metric-row">
+                <div class="phone-metric">
+                  <span class="label">Time ↘</span>
+                  <span class="value">-18%</span>
+                </div>
+                <div class="phone-metric">
+                  <span class="label">Money ↘</span>
+                  <span class="value">-25%</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="phone-nav">
+              <button type="button" class="active" data-phone-target="home">Home</button>
+              <button type="button" data-phone-target="limits">Limits</button>
+              <button type="button" data-phone-target="stats">Stats</button>
+            </div>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <footer class="controls">
+      <div></div>
+      <div class="buttons">
+        <button class="nav-btn" id="prevBtn" type="button">
+          <span class="icon">◀</span>
+          <span>Previous</span>
+        </button>
+        <div class="step-indicator" id="stepIndicator"></div>
+        <button class="nav-btn" id="nextBtn" type="button">
+          <span>Next</span>
+          <span class="icon">▶</span>
+        </button>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const indicator = document.getElementById('stepIndicator');
+
+    let current = 0;
+
+    function updateSlides() {
+      slides.forEach((slide, index) => {
+        slide.classList.toggle('active', index === current);
+      });
+      indicator.textContent = `Slide ${current + 1} / ${slides.length}`;
+    }
+
+    function goNext() {
+      if (current < slides.length - 1) {
+        current++;
+        updateSlides();
+      }
+    }
+
+    function goPrev() {
+      if (current > 0) {
+        current--;
+        updateSlides();
+      }
+    }
+
+    nextBtn.addEventListener('click', goNext);
+    prevBtn.addEventListener('click', goPrev);
+
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowRight') {
+        goNext();
+      } else if (event.key === 'ArrowLeft') {
+        goPrev();
+      }
+    });
+
+    // Mobile app prototype interaction
+    const phoneButtons = document.querySelectorAll('[data-phone-target]');
+
+    phoneButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const phone = btn.closest('.phone');
+        if (!phone) return;
+
+        const target = btn.dataset.phoneTarget;
+        const screens = phone.querySelectorAll('.phone-screen');
+
+        screens.forEach((screen) => {
+          screen.classList.toggle('active', screen.dataset.screen === target);
+        });
+
+        phone.querySelectorAll('[data-phone-target]').forEach((b) => {
+          b.classList.toggle('active', b === btn);
+        });
+      });
+    });
+
+    // Initialize slides indicator on load
+    updateSlides();
+  </script>
+</body>
+</html>
